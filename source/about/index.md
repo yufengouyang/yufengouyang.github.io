@@ -53,6 +53,6 @@ date: 2024-01-01 17:12:39
 	<h4 style="color: white;text-align: right;padding: 5px;">开源项目/技术文章</h4>
 </div>
 
-- [我的github首页](https://github.com/yufengouyang)
+- [我的github首页](https://github.com/ouyangyufeng123)
 - [我的CSDN首页](https://blog.csdn.net/qq_40710674)
 - [个人博客](https://yufengouyang.github.io)
