@@ -32,12 +32,6 @@ social_links:
   -
     icon: mail
     link: mailto:ou_1415190020@163.com
-  -
-    icon: weixin
-    link: mailto:ou_1415190020@163.com
-  -
-    icon: qq
-    link: mailto:ou_1415190020@163.com
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
@@ -49,8 +43,8 @@ tags_overview: false
 #   - post_count: whether to show only the x most recent posts.
 #   - sort_updated: sort posts by last modification date instead of creation date.
 posts_overview:
-  show_all_posts: false
-  post_count: 5
+  show_all_posts: true
+  post_count: 10
   sort_updated: true
 
 # Customize the archive view.
@@ -165,11 +159,11 @@ disqus:
 
 # Fill in your Utterances data to enable Utterances comments
 utterances:
-  enabled: false
-  repo: owner/githubrepo
+  enabled: true
+  repo: yufengouyang/blog.comment
   issue_term: pathname
   label: Comment
-  theme: github-dark
+  theme: github-light
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:
