@@ -17,6 +17,8 @@ nav:
   home: /
   articles: /archives/
   search: /search/
+  friendly: /friendly/
+  tool: /tool/
   about: /about/
 
 # Links to your social media accounts.
@@ -205,4 +207,4 @@ cdn:
 
 # 是否开启访问量统计功能(不蒜子)
 busuanzi:
- enable: true
+ enable: false

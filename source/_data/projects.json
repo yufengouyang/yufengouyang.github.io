@@ -2,11 +2,26 @@
     {
        "name":"Hexo",
        "url":"https://hexo.io/",
-       "desc":"A fast, simple & powerful blog framework"
+       "desc":"一个快速,简洁且高效的博客框架"
     },
     {
-       "name":"Font Awesome",
-       "url":"http://fontawesome.io/",
-       "desc":"The iconic font and CSS toolkit"
+       "name":"GitHub",
+       "url":"https://github.com/",
+       "desc":"代码托管平台"
+    },
+    {
+       "name":"Node",
+       "url":"https://nodejs.org/en",
+       "desc":"一个免费的、开源的、跨平台的 JavaScript运行时环境"
+    },
+    {
+       "name":"Cactus",
+       "url":"https://github.com/probberechts/hexo-theme-cactus",
+       "desc":"博客使用的主题"
+    },
+    {
+       "name":"Utterances",
+       "url":"https://utteranc.es/",
+       "desc":"博客文章里面用的评论插件"
     }
 ]

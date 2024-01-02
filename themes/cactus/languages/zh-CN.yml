@@ -6,6 +6,8 @@ nav:
   tag: 标签
   category: 分类
   search: 搜索
+  friendly: 友链
+  tool: 工具
   
 icons:
   menu: 目录
@@ -36,7 +38,7 @@ post:
     share: 分享
 
 search:
-  search: 搜索...
+  search: 请输入文章关键字...
   no_results: 抱歉，没有符合您搜索条件的结果。请换其它关键词再试。
 
 tag_cloud:

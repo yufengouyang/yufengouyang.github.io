@@ -1,5 +1,5 @@
 ---
-title: about
+title: 关于
 date: 2024-01-01 17:12:39
 ---
 
@@ -9,10 +9,8 @@ date: 2024-01-01 17:12:39
 
 <div style="float: left;display: flex;flex-wrap: wrap;width: 75%;justify-content: space-between;">
     <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">姓名： 欧阳俞峰</div>
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">出生年月： 1998-8</div>
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">籍贯： 湖南</div>
+    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">技能： JAVA研发工程师</div>
     <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">邮箱： ou_1415190020@163.com</div>
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">技能： JAVA开发</div>
 </div>
 
 
