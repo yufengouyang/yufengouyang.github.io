@@ -6,12 +6,12 @@ date: 2024-01-01 17:12:39
 <div style="background-color: #000033;width: 100%;">
 	<h4 style="color: white;text-align: right;padding: 5px;">个人介绍</h4>
 </div>
-
 <div style="float: left;display: flex;flex-wrap: wrap;width: 75%;justify-content: space-between;">
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">姓名： 欧阳俞峰</div>
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">技能： JAVA研发工程师</div>
-    <div style="width: 45%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">邮箱： ou_1415190020@163.com</div>
+    <div style="width: 100%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">姓名： 欧阳俞峰</div>
+    <div style="width: 100%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">技能： JAVA研发工程师</div>
+    <div style="width: 100%;font-weight: 500;color: #4c4c4c;font-size: 14px;margin: 5px;">邮箱： ou_1415190020@163.com</div>
 </div>
+
 
 
 
@@ -42,7 +42,7 @@ date: 2024-01-01 17:12:39
 	<h4 style="color: white;text-align: right;padding: 5px;">商业合作</h4>
 </div>
 
-小红书和闲鱼平台售卖相关Java商品。有需要的小伙伴可以找我合作哦！
+小红书和闲鱼平台售卖相关Java商品。有需要的小伙伴可以找我合作哦！关于该技术博客的搭建有不懂的小伙伴也可以问我！
 
 - 咸鱼号：xjn_baby  
 - 小红书号：555122738
