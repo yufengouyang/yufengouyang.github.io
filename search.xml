@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>记录一下java生产环境CPU占用过高实例</title>
+      <link href="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/"/>
+      <url>/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>今天还是像往常一样下班后坐公交车回家，突然工作微信群里发来一个截图，我点开一看是我之前上线的服务占用CPU过高了导致程序直接卡死。记录分享一下我的解决思路希望可以帮到你们。</p></blockquote><hr><h3 id="1-先查看监控里每个逻辑cpu情况"><a href="#1-先查看监控里每个逻辑cpu情况" class="headerlink" title="1. 先查看监控里每个逻辑cpu情况"></a><strong>1. 先查看监控里每个逻辑cpu情况</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：top</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/0a7ecddcc48f4cddad8cc714895f06f5.png" class=""><h3 id="2-查看进程jvm虚拟机堆使用情况"><a href="#2-查看进程jvm虚拟机堆使用情况" class="headerlink" title="2. 查看进程jvm虚拟机堆使用情况"></a><strong>2. 查看进程jvm虚拟机堆使用情况</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：jmap -heap 28292</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/4c1d8f73baac45c99f22b03f45124dea.png" class=""><h3 id="3-打印最近一次GC情况"><a href="#3-打印最近一次GC情况" class="headerlink" title="3. 打印最近一次GC情况"></a><strong>3. 打印最近一次GC情况</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：jstat -gcutil 28292</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/8e9af51e348f4b11baa1782e09e589d1.png" class=""><h3 id="4-查看java哪个线程cpu占用高"><a href="#4-查看java哪个线程cpu占用高" class="headerlink" title="4. 查看java哪个线程cpu占用高"></a><strong>4. 查看java哪个线程cpu占用高</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：top -H -p 28292</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/83db0396d06543fbbc15a92372470246.png" class=""><h3 id="5-确定线程id，再通过命令计算十六进制值"><a href="#5-确定线程id，再通过命令计算十六进制值" class="headerlink" title="5. 确定线程id，再通过命令计算十六进制值"></a><strong>5. 确定线程id，再通过命令计算十六进制值</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：printf &quot;%x\n&quot; 28329</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/9897e2d22d894603bf8a0610b70c86e5.png" class=""><h3 id="6-打印该线程堆栈内容"><a href="#6-打印该线程堆栈内容" class="headerlink" title="6. 打印该线程堆栈内容"></a><strong>6. 打印该线程堆栈内容</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行命令：jstack 28292 | grep 6ea9 -A 100</span><br></pre></td></tr></table></figure><img src="/2024/01/03/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8Bjava%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83CPU%E5%8D%A0%E7%94%A8%E8%BF%87%E9%AB%98%E5%AE%9E%E4%BE%8B/ff697731db264f39bdd8438201f192c2.png" class=""><p>至此，根据截图里面的错误信息基本就可以定义到具体代码类的位置了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>bito操作手册</title>
       <link href="/2024/01/03/bito%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
       <url>/2024/01/03/bito%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
