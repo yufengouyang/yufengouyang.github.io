@@ -12,7 +12,7 @@
     {
        "name":"Node",
        "url":"https://nodejs.org/en",
-       "desc":"一个免费的、开源的、跨平台的 JavaScript运行时环境"
+       "desc":"一个免费的、开源的、跨平台的JS运行时环境"
     },
     {
        "name":"Cactus",

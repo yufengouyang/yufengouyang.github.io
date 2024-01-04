@@ -2,6 +2,7 @@
   <% if (config.description) { %>
     <%- markdown(config.description) %>
   <% } %>
+  我猜你想要和我互换<a href="/friendly/">友链</a>，寻找提高工作效率的<a href="/tool/">工具</a>，甚至想要进一步<a href="/about/">了解我</a>!
   <% if (theme.social_links) { %>
     <p>
       <%= __('index.find_me_on') %>
@@ -59,6 +60,7 @@
   <% if (theme.posts_overview.show_all_posts) { %>
     <%- partial('_partial/pagination') %>
   <% } %>
+  想要了解更多文章：<a href="/search/">去搜索</a>
 </section>
 
 <% if (site.data.projects) { %>
