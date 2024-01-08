@@ -3,6 +3,8 @@ title: java空指针异常解决方案
 date: 2024-01-03 17:09:58
 tags:
 - java
+categories:
+- java基础
 ---
 
 ## 问题描述

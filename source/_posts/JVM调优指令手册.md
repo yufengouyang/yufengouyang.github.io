@@ -3,6 +3,8 @@ title: JVM调优指令手册
 date: 2024-01-03 17:15:04
 tags:
 - java
+categories:
+- java基础
 ---
 
 ## 栈和局部变量操作 

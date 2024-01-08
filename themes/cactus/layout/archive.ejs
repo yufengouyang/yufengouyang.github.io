@@ -1,3 +1,12 @@
+<section id="categories">
+  <h3>总类</h3>
+  <div id="categories">
+    <div class="category-list">
+      <%- list_categories() %>
+    </div>
+  </div>
+</section>
+
 <div id="archive">
   <ul class="post-list">
     <% var year = 0 %>
@@ -8,7 +17,7 @@
       <% change = year !== itemYear %>
       <% year = change ? itemYear : year %>
       <% if (change) { %>
-        <li class="post-year"><h2><%= year %></h2></li>
+        <li class="post-year"><h3><%= year %></h3></li>
       <% } %>
       <li class="post-item">
         <%- partial('_partial/post/date', { post: post, class_name: 'meta' }) %>

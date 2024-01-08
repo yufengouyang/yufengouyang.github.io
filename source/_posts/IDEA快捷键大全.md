@@ -3,6 +3,8 @@ title: IDEA快捷键大全
 date: 2024-01-03 17:38:14
 tags:
 - idea
+categories:
+- 开发工具
 ---
 
 > IDEA 中提供了很多快捷键，点击`File --> Settings --> keymap`便可进入看到 IDEA 提供的快捷键。我们也可以搜索和自定义所有快捷键，下面给出的是 `IDEA 中默认的快捷键`；

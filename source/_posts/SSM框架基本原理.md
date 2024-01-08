@@ -2,10 +2,11 @@
 title: SSM框架基本原理
 date: 2024-01-08 10:20:39
 tags:
-- 框架原理
 - spring
 - mybatis
 - springMvc
+categories:
+- 框架原理
 ---
 
 ### 一：基本概念
