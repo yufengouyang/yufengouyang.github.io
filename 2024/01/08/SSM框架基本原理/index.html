@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一：基本概念SSM框架是SpringMVC ，Spring和Mybatis框架的整合，是标准的MVC模式，将整个系统划分为四层：View层，Controller层，Service层，Dao层  Spring运用IOC和AOP思想实现业务对象管理 SpringMVC主要负责请求的转发和视图管理 Mybatis封装JDBC作为数据对象的持久化引擎  二：基本原理1. Spring原理我们平时开发接触最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSM框架基本原理">
+<meta property="og:url" content="https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="欧阳俞峰的个人博客">
+<meta property="og:description" content="一：基本概念SSM框架是SpringMVC ，Spring和Mybatis框架的整合，是标准的MVC模式，将整个系统划分为四层：View层，Controller层，Service层，Dao层  Spring运用IOC和AOP思想实现业务对象管理 SpringMVC主要负责请求的转发和视图管理 Mybatis封装JDBC作为数据对象的持久化引擎  二：基本原理1. Spring原理我们平时开发接触最">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/20151118190949363.png">
+<meta property="article:published_time" content="2024-01-08T10:20:39.000Z">
+<meta property="article:modified_time" content="2024-01-08T07:36:57.977Z">
+<meta property="article:author" content="ouyangyufeng">
+<meta property="article:tag" content="框架原理">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="mybatis">
+<meta property="article:tag" content="springMvc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/20151118190949363.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/head-favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/head-favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/head-apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>SSM框架基本原理</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/friendly/">友链</a></li><!--
+     --><!--
+       --><li><a href="/tool/">工具</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2024/01/03/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&text=SSM框架基本原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&is_video=false&description=SSM框架基本原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SSM框架基本原理&body=Check out this article: https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&name=SSM框架基本原理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&t=SSM框架基本原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一：基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">二：基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Spring%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">1. Spring原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-SpringMVC%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">2. SpringMVC原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Mybatis%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">3. Mybatis原理</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        SSM框架基本原理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">ouyangyufeng</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-01-08T10:20:39.000Z" class="dt-published" itemprop="datePublished">2024-01-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/mybatis/" rel="tag">mybatis</a>, <a class="p-category" href="/tags/spring/" rel="tag">spring</a>, <a class="p-category" href="/tags/springMvc/" rel="tag">springMvc</a>, <a class="p-category" href="/tags/%E6%A1%86%E6%9E%B6%E5%8E%9F%E7%90%86/" rel="tag">框架原理</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="一：基本概念"><a href="#一：基本概念" class="headerlink" title="一：基本概念"></a>一：基本概念</h3><p>SSM框架是SpringMVC ，Spring和Mybatis框架的整合，是标准的MVC模式，将整个系统划分为四层：View层，Controller层，Service层，Dao层</p>
+<ol>
+<li>Spring运用IOC和AOP思想实现业务对象管理</li>
+<li>SpringMVC主要负责请求的转发和视图管理</li>
+<li>Mybatis封装JDBC作为数据对象的持久化引擎</li>
+</ol>
+<h3 id="二：基本原理"><a href="#二：基本原理" class="headerlink" title="二：基本原理"></a>二：基本原理</h3><h4 id="1-Spring原理"><a href="#1-Spring原理" class="headerlink" title="1. Spring原理"></a>1. Spring原理</h4><p>我们平时开发接触最多的估计就是IOC容器，它可以装载bean（也就是我们Java中的类，当然也包括service dao里面的），有了这个机制，我们就不用在每次使用这个类的时候为它初始化，很少看到关键字new。另外Spring的AOP，事务管理等等都是我们经常用到的。</p>
+<p><strong>IOC</strong>: 所谓控制反转就是应用本身不负责依赖对象的创建及维护，依赖对象的创建及维护是由外部容器负责的。这样控制权就由应用转移到了外部容器，控制权的转移就是所谓反转，目的是为了获得更好的扩展性和良好的可维护性。</p>
+<p><strong>AOP</strong>: 为Aspect Oriented  Programming的缩写，意为：面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<h4 id="2-SpringMVC原理"><a href="#2-SpringMVC原理" class="headerlink" title="2. SpringMVC原理"></a>2. SpringMVC原理</h4><ol>
+<li>客户端发送请求到DispacherServlet（分发器）</li>
+<li>由DispacherServlet分发器去查询HanderMapping（映射）并找到处理请求的Controller（控制器）</li>
+<li>Controller调用Service业务逻辑处理后，返回ModelAndView</li>
+<li>DispacherSerclet查询视图解析器并找到ModelAndView渲染指定的视图</li>
+<li>视图负责将结果显示到客户端</li>
+</ol>
+<img src="/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/20151118190949363.png" class="">
+
+<h4 id="3-Mybatis原理"><a href="#3-Mybatis原理" class="headerlink" title="3. Mybatis原理"></a>3. Mybatis原理</h4><p>mybatis是对jdbc的封装，它让数据库底层操作变的透明。mybatis的操作都是围绕一个sqlSessionFactory实例展开的。mybatis通过配置文件关联到各实体类的Mapper文件，Mapper文件中配置了每个类对数据库所需进行的sql语句映射。在每次与数据库交互时，通过sqlSessionFactory拿到一个sqlSession，再执行sql命令。</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js"
+        repo="[ENTER REPO HERE]"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a href="/friendly/">友链</a></li>
+        
+          <li><a href="/tool/">工具</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">一：基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">二：基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Spring%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">1. Spring原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-SpringMVC%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">2. SpringMVC原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Mybatis%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">3. Mybatis原理</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&text=SSM框架基本原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&is_video=false&description=SSM框架基本原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SSM框架基本原理&body=Check out this article: https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&title=SSM框架基本原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&name=SSM框架基本原理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yufengouyang.github.io/2024/01/08/SSM%E6%A1%86%E6%9E%B6%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/&t=SSM框架基本原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2034
+    ouyangyufeng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+      --><li><a href="/">首页</a></li><!--
+    --><!--
+      --><li><a href="/archives/">归档</a></li><!--
+    --><!--
+      --><li><a href="/search/">搜索</a></li><!--
+    --><!--
+      --><li><a href="/friendly/">友链</a></li><!--
+    --><!--
+      --><li><a href="/tool/">工具</a></li><!--
+    --><!--
+      --><li><a href="/about/">关于</a></li><!--
+    -->
+      </ul>
+      <ul>
+        
+          <!-- 不蒜子统计 -->
+          <span id="busuanzi_container_site_pv">
+            <i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+          </span>
+          <span class="post-meta-divider">|</span>
+          <span id="busuanzi_container_site_pv"></span>
+            <i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span>
+          </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        
+      </ul>
+    </nav>
+  </div>
+  
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'yufengouyang/blog.comment';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
