@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Linux命令查询网站</title>
+      <link href="/2024/01/30/Linux%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%99/"/>
+      <url>/2024/01/30/Linux%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%99/</url>
+      
+        <content type="html"><![CDATA[<p>1.linux命令大全手册：<a href="https://www.linuxcool.com/">https://www.linuxcool.com/</a></p><p>2.linux命令大全：<a href="https://man.linuxde.net/">https://man.linuxde.net/</a></p><p>3linux命令手册：<a href="http://linux.51yip.com/">http://linux.51yip.com/</a></p><p>4linux命令大全和教程：<a href="https://www.runoob.com/linux/linux-command-manual.html">https://www.runoob.com/linux/linux-command-manual.html</a></p><p>5linux常用命令：<a href="https://www.runoob.com/w3cnote/linux-common-command-2.html">https://www.runoob.com/w3cnote/linux-common-command-2.html</a>  <a href="https://blog.csdn.net/qq_23329167/article/details/83856430">https://blog.csdn.net/qq_23329167/article/details/83856430</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Less常见命令</title>
+      <link href="/2024/01/30/Less%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/"/>
+      <url>/2024/01/30/Less%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<p>在Linux系统中，使用<a href="https://www.linuxcool.com/less">less命令</a>可以查看日志文件。下面是一些常用的less命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">less filename: 查看指定文件的内容。</span><br><span class="line">/pattern: 搜索包含指定模式的文本，可以使用向上或向下箭头浏览搜索结果。</span><br><span class="line">n: 在搜索结果中跳转到下一个匹配项。</span><br><span class="line">N: 在搜索结果中跳转到上一个匹配项。</span><br><span class="line">G: 跳转到文件的最后一行。</span><br><span class="line">g: 跳转到文件的第一行。</span><br><span class="line">q: 退出less命令。</span><br><span class="line">f: 显示文件名和当前行号。</span><br><span class="line">n: 显示下一行。</span><br><span class="line">p: 显示上一行。</span><br><span class="line">u: 向上滚动一屏。</span><br><span class="line">d: 向下滚动一屏。</span><br><span class="line">b: 向上翻半屏。</span><br><span class="line">f: 向下翻半屏。</span><br><span class="line">Ctrl + f: 向下滚动一屏。</span><br><span class="line">Ctrl + b: 向上滚动一屏。</span><br><span class="line">Ctrl + d: 向下滚动半屏。</span><br><span class="line">Ctrl + u: 向上滚动半屏。</span><br><span class="line">Ctrl + g: 显示当前行号和文件名。</span><br></pre></td></tr></table></figure><p>其它</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ less filename</span><br><span class="line"># 带行号打开</span><br><span class="line">$ less -N filename</span><br><span class="line"># 打开时显示行号，并跳到1000行</span><br><span class="line">$ less +1000 -N filename</span><br><span class="line">跳转到某一行，输入数字后跟g/G即可（不需要按回车）:</span><br><span class="line">1000g</span><br></pre></td></tr></table></figure><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul><li>less 命令可以用于查看大文件，比 cat 命令更加高效。</li><li>less 命令支持搜索、滚动、翻页等操作，可以方便地查找和浏览文件内容。</li><li>less 命令默认不显示行号，可以使用 <code>-N</code> 选项显示行号。</li><li>less 命令一般用于终端操作，不适用于图形界面，如果需要在图形界面中查看文件，可以使用文本编辑器或文件浏览器。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JVM堆中的新生代、老年代和永久代</title>
       <link href="/2024/01/08/JVM%E5%A0%86%E4%B8%AD%E7%9A%84%E6%96%B0%E7%94%9F%E4%BB%A3%E3%80%81%E8%80%81%E5%B9%B4%E4%BB%A3%E5%92%8C%E6%B0%B8%E4%B9%85%E4%BB%A3/"/>
       <url>/2024/01/08/JVM%E5%A0%86%E4%B8%AD%E7%9A%84%E6%96%B0%E7%94%9F%E4%BB%A3%E3%80%81%E8%80%81%E5%B9%B4%E4%BB%A3%E5%92%8C%E6%B0%B8%E4%B9%85%E4%BB%A3/</url>
